@@ -8,13 +8,9 @@ public class Simulation {
     static String version = "2.0"; /* The Version of the program */
 
     public static int randomaltitude() {
-        int max = 20000;
-        int min = 10000;
-        int r = (int)(Math.random() * (max - min)) + min;
-        return (r % 15000 + 4000);
+        int r = (int)(Math.random() * (10000)) + 10000;
+        return (r % 15000 + 4501);
     }
-
-
     public String gameHeader() {
         String s = "";
         s = s + "\nMars Simulation - Version " + version + "\n";
@@ -29,12 +25,15 @@ public class Simulation {
     public String getHeader() {
         String s = "";
         s = s + "\nTime\t";
-        s = s + "Velocity\t\t"; s = s + "Fuel\t\t";
-        s = s + "Altitude\t\t"; s = s + "Burn\n";
+        s = s + "Velocity\t\t";
+        s = s + "Fuel\t\t";
+        s = s + "Altitude\t\t";
+        s = s + "Burn\n";
         s = s + "----\t";
         s = s + "-----\t\t";
         s = s + "----\t\t";
-        s = s + "------\t\t"; s = s + "----\n";
+        s = s + "------\t\t";
+        s = s + "----\n";
         return s;
     }
 
@@ -66,6 +65,7 @@ public class Simulation {
             }
         }
         printString(vehicle.checkFinalStatus());
+        status = vehicle.getStatus(burnInterval);
         if (status != null) {
             return status.getStatus();
         }
@@ -76,6 +76,8 @@ public class Simulation {
         // create a new Simulation object with a random starting altitude
         // create a new BurnInputStream
         // pass the new BurnInputStream to the runSimulation method
+        Simulation game = new Simulation(new Vehicle(Simulation.randomaltitude()));
+        BurnStream burnSource = new BurnInputStream();
+        game.runSimulation(burnSource);
     }
-
 }
